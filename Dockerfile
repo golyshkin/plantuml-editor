@@ -20,6 +20,9 @@ RUN npm run build
 # Stage 2: Production image with nginx
 FROM nginx:alpine
 
+# Allow PLANTUML use a local intranet resources and diagrams (e.x. GitLab)
+ENV PLANTUML_SECURITY_PROFILE=UNSECURE
+
 # Copy built assets from builder stage
 COPY --from=builder /app/dist /usr/share/nginx/html
 
